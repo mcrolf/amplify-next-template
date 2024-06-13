@@ -21,10 +21,10 @@ const schema = a.schema({
     savedRecipes: a.id().array(), //array of recipe id from other authors.
     following: a.id().array(), //can be user id or store id.
     eventsAttended: a.id().array(), //array of event id.
-    achievements: a.hasMany('Achievement', 'user'),
-    transactions: a.hasMany('Transaction', 'user'),
-    settings: a.hasOne('Settings', 'user'),
-    notifications: a.hasMany('Notification', 'user')
+    //achievements: a.hasMany('Achievement', 'user'),
+    //transactions: a.hasMany('Transaction', 'user'),
+    //settings: a.hasOne('Settings', 'user'),
+    //notifications: a.hasMany('Notification', 'user')
   }).authorization((allow) => [allow.publicApiKey()]),
 
   Recipe: a.model({
@@ -40,7 +40,7 @@ const schema = a.schema({
     brewRatio: a.string().array(), //max 2, in:out.
     extractionTime: a.string(),
     extraNotes: a.string(),
-    ratings: a.hasMany('Rating', 'recipe'), //recipe is recipe id.
+    //ratings: a.hasMany('Rating', 'recipe'), //recipe is recipe id.
   }).authorization((allow) => [allow.publicApiKey()]),
 
   Store: a.model({
@@ -53,7 +53,7 @@ const schema = a.schema({
     }),
     events: a.hasMany('Event', 'author'), //author is store id.
     followers: a.id().array(), //array of user id.
-    inventory: a.hasOne('Inventory', 'store'), //store is store id.
+    //inventory: a.hasOne('Inventory', 'store'), //store is store id.
     ecommerceAPI: a.string(),
     transactions: a.id().array(), //array of transactions id where this.id = transaction.storeid.
     ein: a.string(), //business ein
