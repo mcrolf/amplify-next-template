@@ -50,14 +50,14 @@ export default function App() {
   return (
     <main>
       <h1>My recipes</h1>
-      <button onClick={createTodo}>+ new</button>
+      <button onClick={createRecipe}>+ new</button>
       <ul>
         {recipes.map((recipe) => (
-          <li key={recipe.id}>{recipe.title}</li>
+          <li key={recipe.id}> title:{recipe.title}</li>
         ))}
       </ul>
       <div>
-        🥳 App successfully hosted. Try creating a new todo.
+        🥳 App successfully hosted. Try creating a new recipe.
         <br />
         <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
           Review next steps of this tutorial.
