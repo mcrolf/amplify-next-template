@@ -7,11 +7,73 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
+  Todo: a.model({
+    content: a.string(), 
+  }).authorization((allow) => [allow.publicApiKey()]),
+
+  User: a.model({
+    id: a.id(),
+    username: a.string(),
+    firstname: a.string().required(),
+    email: a.email().required(),
+    birthday: a.date(),
+    myRecipes: a.hasMany('Recipe', 'author'), //author is user id.
+    savedRecipes: a.id().array(), //array of recipe id from other authors.
+    following: a.id().array(), //can be user id or store id.
+    eventsAttended: a.id().array(), //array of event id.
+    achievements: a.hasMany('Achievement', 'user'),
+    transactions: a.hasMany('Transaction', 'user'),
+    settings: a.hasOne('Settings', 'user'),
+    notifications: a.hasMany('Notification', 'user')
+  }).authorization((allow) => [allow.publicApiKey()]),
+
+  Recipe: a.model({
+    id: a.id(). required(),
+    userId: a.id(), //reference field
+    author: a.belongsTo('User', 'userId'),
+    title: a.string(),
+    createdOn: a.datetime(),
+    drinkType: a.string(),
+    coffee: a.string().array(), //beans go here.
+    drinkAdditions: a.string().array(),
+    waterTemp: a.string(),
+    brewRatio: a.string().array(), //max 2, in:out.
+    extractionTime: a.string(),
+    extraNotes: a.string(),
+    ratings: a.hasMany('Rating', 'recipe'), //recipe is recipe id.
+  }).authorization((allow) => [allow.publicApiKey()]),
+
+  Store: a.model({
+    id: a.id().required(),
+    name: a.string().required(),
+    address: a.string(),
+    location: a.customType({
+      lat: a.float(),
+      long: a.float()
+    }),
+    events: a.hasMany('Event', 'author'), //author is store id.
+    followers: a.id().array(), //array of user id.
+    inventory: a.hasOne('Inventory', 'store'), //store is store id.
+    ecommerceAPI: a.string(),
+    transactions: a.id().array(), //array of transactions id where this.id = transaction.storeid.
+    ein: a.string(), //business ein
+    paymentVerified: a.boolean(),
+    admins: a.id().array(), //array of user id.
+  }).authorization((allow) => [allow.publicApiKey()]),
+
+  Event: a.model({
+    id: a.id().required(),
+    storeId: a.id(), //reference field
+    author: a.belongsTo('Store', 'storeId'),
+    title: a.string(),
+    address: a.string(),
+    location: a.customType({
+      lat: a.float(),
+      long: a.float(),
+    }),
+    startTime: a.datetime(),
+    endTime: a.datetime(),
+  })
 });
 
 export type Schema = ClientSchema<typeof schema>;

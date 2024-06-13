@@ -14,6 +14,7 @@ const client = generateClient<Schema>();
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [recipes, setRecipes] = useState<Array<Schema["Recipe"]["type"]>>([]);
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
@@ -21,8 +22,14 @@ export default function App() {
     });
   }
 
+  function listRecipes() {
+    client.models.Recipe.observeQuery().subscribe({
+      next: (data) => setRecipes([...data.items]),
+    });
+  }
+
   useEffect(() => {
-    listTodos();
+    listRecipes();
   }, []);
 
   function createTodo() {
@@ -31,13 +38,22 @@ export default function App() {
     });
   }
 
+  function createRecipe(){
+    client.models.Recipe.create({
+      // id: randomly generated,
+      title: window.prompt('Recipe title'),
+      createdOn: new Date().getDate().toString(),
+
+    });
+  }
+
   return (
     <main>
-      <h1>My todos</h1>
+      <h1>My recipes</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+        {recipes.map((recipe) => (
+          <li key={recipe.id}>{recipe.title}</li>
         ))}
       </ul>
       <div>
