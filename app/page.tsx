@@ -45,6 +45,7 @@ export default function App() {
       createdOn: new Date().getDate().toString(),
 
     });
+    console.log('hit');
   }
 
   return (

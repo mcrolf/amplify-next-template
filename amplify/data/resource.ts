@@ -29,34 +29,34 @@ const schema = a.schema({
 
   DrinkType: a.enum([
     'Espresso',
-    'Double Espresso',
-    'Red Eye', 
-    'Black Eye', 
+    'Double_Espresso',
+    'Red_Eye', 
+    'Black_Eye', 
     'Americano', 
-    'Long Black', 
+    'Long_Black', 
     'Macchiato',
     'Cortado',
     'Breve',
     'Cappuccino',
-    'Flat White',
-    'Cafe Latte',
+    'Flat_White',
+    'Cafe_Latte',
     'Mocha',
     'Vienna',
     'Affogato',
-    'Black Coffee',
-    'Iced Coffee',
+    'Black_Coffee',
+    'Iced_Coffee',
   ]),
 
   BrewMethod: a.enum([
     'Espresso',
     'Drip',
-    'Pour Over',
-    'Cold Brew',
+    'Pour_Over',
+    'Cold_Brew',
     'AeroPress',
-    'French Press',
+    'French_Press',
     'Turkish',
     'Percolator',
-    'Moka Pot',
+    'Moka_Pot',
     'Instant',
   ]),
 
@@ -151,7 +151,7 @@ const schema = a.schema({
     description: a.string(),
   }).authorization((allow) => [allow.publicApiKey()]),
 
-  
+
 });
 
 export type Schema = ClientSchema<typeof schema>;
