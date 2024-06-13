@@ -21,10 +21,10 @@ const schema = a.schema({
     savedRecipes: a.id().array(), //array of recipe id from other authors.
     following: a.id().array(), //can be user id or store id.
     eventsAttended: a.id().array(), //array of event id.
-    achievements: a.hasMany('Achievement', 'user'),
-    //transactions: a.hasMany('Transaction', 'user'),
+    achievements: a.hasMany('Achievement', 'userId'),
+    transactions: a.hasMany('Transaction', 'userId'),
     settings: a.hasOne('Settings', 'userId'), //user is userId.
-    notifications: a.hasMany('Notification', 'user'),
+    notifications: a.hasMany('Notification', 'userId'),
   }).authorization((allow) => [allow.publicApiKey()]),
 
   DrinkType: a.enum([
