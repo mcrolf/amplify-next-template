@@ -17,7 +17,7 @@ const schema = a.schema({
     firstname: a.string().required(),
     email: a.email().required(),
     birthday: a.date(),
-    myRecipes: a.hasMany('Recipe', 'author'), //author is user id.
+    myRecipes: a.hasMany('Recipe', 'userId'), //author is user id.
     savedRecipes: a.id().array(), //array of recipe id from other authors.
     following: a.id().array(), //can be user id or store id.
     eventsAttended: a.id().array(), //array of event id.
@@ -51,7 +51,7 @@ const schema = a.schema({
       lat: a.float(),
       long: a.float()
     }),
-    events: a.hasMany('Event', 'author'), //author is store id.
+    events: a.hasMany('Event', 'storeId'), //store id reference.
     followers: a.id().array(), //array of user id.
     //inventory: a.hasOne('Inventory', 'store'), //store is store id.
     ecommerceAPI: a.string(),
