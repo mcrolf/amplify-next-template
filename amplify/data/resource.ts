@@ -73,7 +73,7 @@ const schema = a.schema({
     }),
     startTime: a.datetime(),
     endTime: a.datetime(),
-  })
+  }).authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
