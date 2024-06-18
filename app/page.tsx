@@ -44,10 +44,9 @@ export default function App() {
     client.models.Recipe.create({
       // id: randomly generated,
       title: window.prompt('Recipe title'),
-      createdOn: new Date().getDate().toString(),
 
     });
-    console.log('hit');
+    console.log('hit create recipe');
   }
 
   function deleteTodo(id: string){
@@ -73,7 +72,7 @@ export default function App() {
           </ul>
           <ul>
             {recipes.map((recipe) => (
-              <li key={recipe.id} onClick={() => deleteRecipe(recipe.id)}> title:{recipe.title}</li>
+              <li key={recipe.id} onClick={() => deleteRecipe(recipe.id)}> title:{recipe.title} : {recipe.createdAt}</li>
             ))}
           </ul>
           <div>
