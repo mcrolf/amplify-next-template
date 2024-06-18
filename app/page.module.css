@@ -1,10 +1,16 @@
 .main {
+  margin: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  width: 90%;
+}
+
+.button {
+  padding: 6rem;
 }
 
 .description {
@@ -13,7 +19,7 @@
   align-items: inherit;
   font-size: 0.85rem;
   max-width: var(--max-width);
-  width: 100%;
+  width: 90%;
   z-index: 2;
   font-family: var(--font-mono);
 }
@@ -42,7 +48,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(25%, auto));
-  max-width: 100%;
+  max-width: 90%;
   width: var(--max-width);
 }
 
@@ -112,6 +118,17 @@
     padding: 4rem;
   }
 
+  .main {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
+    width: 90%;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     margin-bottom: 120px;
@@ -149,7 +166,7 @@
     display: flex;
     justify-content: center;
     position: fixed;
-    width: 100%;
+    width: 90%;
   }
 
   .description p {

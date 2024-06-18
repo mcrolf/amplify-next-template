@@ -6,9 +6,8 @@ import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
+import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(outputs);
 
@@ -63,7 +62,6 @@ export default function App() {
     <Authenticator>
       {({signOut, user}) => (
         <main>
-          <h1>{user?.signInDetails?.loginId}'s lists</h1>
           <h1>My todos</h1>
           <button onClick={createTodo}>+ new todo</button>
           <button onClick={createRecipe}> + new recipe</button>
@@ -78,15 +76,16 @@ export default function App() {
             ))}
           </ul>
           <div>
-            🥳 App successfully hosted. Try creating a new recipe.
+            🥳 App successfully hosted. Try creating a new todo or recipe.
             <br />
             <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
               Review next steps of this tutorial.
             </a>
+            <br/>
+            <button onClick={signOut}>Sign Out</button>
           </div>
         </main>
       )}
     </Authenticator>
-    
   );
 }
