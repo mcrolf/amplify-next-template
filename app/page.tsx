@@ -7,6 +7,8 @@ import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(outputs);
 
@@ -29,6 +31,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    listTodos();
     listRecipes();
   }, []);
 
@@ -48,22 +51,42 @@ export default function App() {
     console.log('hit');
   }
 
+  function deleteTodo(id: string){
+    client.models.Todo.delete({id})
+  }
+
+  function deleteRecipe(id : string){
+    client.models.Recipe.delete({ id })
+  }
+
   return (
-    <main>
-      <h1>My recipes</h1>
-      <button onClick={createRecipe}>+ new</button>
-      <ul>
-        {recipes.map((recipe) => (
-          <li key={recipe.id}> title:{recipe.title}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new recipe.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-    </main>
+    <Authenticator>
+      {({signOut, user}) => (
+        <main>
+          <h1>{user?.signInDetails?.loginId}'s lists</h1>
+          <h1>My todos</h1>
+          <button onClick={createTodo}>+ new todo</button>
+          <button onClick={createRecipe}> + new recipe</button>
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo.id} onClick={() => deleteTodo(todo.id)}> content:{todo.content}</li>
+            ))}
+          </ul>
+          <ul>
+            {recipes.map((recipe) => (
+              <li key={recipe.id} onClick={() => deleteRecipe(recipe.id)}> title:{recipe.title}</li>
+            ))}
+          </ul>
+          <div>
+            🥳 App successfully hosted. Try creating a new recipe.
+            <br />
+            <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+              Review next steps of this tutorial.
+            </a>
+          </div>
+        </main>
+      )}
+    </Authenticator>
+    
   );
 }
