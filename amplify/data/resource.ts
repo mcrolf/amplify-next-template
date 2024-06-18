@@ -75,7 +75,7 @@ const schema = a.schema({
     extractionTime: a.string(),
     extraNotes: a.string(),
     //ratings: a.hasMany('Rating', 'recipe'), //recipe is recipe id.
-  }).authorization((allow) => [allow.publicApiKey()]),
+  }).authorization((allow) => [allow.owner()]),
 
   Store: a.model({
     // id is auto generated.
@@ -127,21 +127,21 @@ const schema = a.schema({
     inventoryUpdates: a.boolean(),
     achievements: a.boolean(),
     following: a.boolean(),
-  }).authorization((allow) => [allow.publicApiKey()]),
+  }).authorization((allow) => [allow.owner()]),
 
   Notification: a.model({
     //id is auto gen.
     userId: a.id(), //reference field.
     user: a.belongsTo('User', 'userId'),
     message: a.string(),
-  }).authorization((allow) => [allow.publicApiKey()]),
+  }).authorization((allow) => [allow.owner()]),
 
   Achievement: a.model({
     //id is auto gen.
     userId: a.id(), //reference field.
     user: a.belongsTo('User', 'userId'),
     description: a.string(),
-  }).authorization((allow) => [allow.publicApiKey()]),
+  }).authorization((allow) => [allow.owner()]),
 
   Transaction: a.model({
     //id is auto gen.

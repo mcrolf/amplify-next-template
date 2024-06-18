@@ -62,7 +62,8 @@ export default function App() {
     <Authenticator>
       {({signOut, user}) => (
         <main>
-          <h1>My todos</h1>
+          <h3>{user?.signInDetails?.loginId}</h3>
+          <h1>Welcome!</h1>
           <button onClick={createTodo}>+ new todo</button>
           <button onClick={createRecipe}> + new recipe</button>
           <ul>

@@ -9,6 +9,10 @@
   width: 90%;
 }
 
+h1{
+  text-wrap: wrap;
+}
+
 .button {
   padding: 6rem;
 }
@@ -116,6 +120,10 @@
 @media (max-width: 700px) {
   .content {
     padding: 4rem;
+  }
+
+  h1{
+    text-wrap: balance;
   }
 
   .main {
